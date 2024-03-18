@@ -1,5 +1,17 @@
 <?php
-$mysqli = new mysqli('database-1.cvqe24uooolq.ap-northeast-1.rds.amazonaws.com','root','OkaTaku0415','test','3306');
+
+// 自動で読み込み
+require './vendor/autoload.php';
+
+// .envを使用する
+Dotenv\Dotenv::createImmutable(__DIR__)->load();
+
+$host = $_ENV['HOST'];
+$password = $_ENV['PASSWORD'];
+$database = $_ENV['DATABASE'];
+$port = $_ENV['PORT'];
+
+$mysqli = new mysqli($host,'root',$password,$database,$port);
 //接続状況の確認
 if($mysqli->connect_error){
 	echo $mysqli->connect_error;
@@ -10,5 +22,4 @@ if($mysqli->connect_error){
 }
 // 切断
 $mysqli->close();
-?>
 
