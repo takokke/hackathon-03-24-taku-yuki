@@ -14,7 +14,7 @@ class SessionsController {
     public function create() {
         session_start();
         //MySQLに接続
-        $mysqli = new mysqli($_ENV['HOST'], 'root', $_ENV['PASSWORD]', $_ENV['DATABASE'], $_ENV['PORT']);
+        $mysqli = new mysqli($_ENV['HOST'], 'root', $_ENV['PASSWORD'], $_ENV['DATABASE'], $_ENV['PORT']);
         if($mysqli->connect_error){
           echo $mysqli->connect_error;
           exit();
