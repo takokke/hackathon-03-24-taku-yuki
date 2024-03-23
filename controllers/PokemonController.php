@@ -30,7 +30,9 @@ class PokemonController {
                 };
                 $stmt = "INSERT INTO trx_cut_dates(`cut_date`, `user_id`) VALUES(?, ?)";
                 $stmt->bind_param("si", $_POST['cutdate'],$_SESSION['user_id']);
-                $stmt->execute();
+		$stmt->execute();
+		$stmt->close();
+		$mysqli->close();
 		header('Location: http://52.197.59.72/pokemon');
 	}
 
