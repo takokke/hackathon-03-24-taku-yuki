@@ -1,5 +1,12 @@
 <?php
 
+// 自動で読み込み
+require '../vendor/autoload.php';
+
+// .envを使用する
+Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
+
+
 return
 [
     'paths' => [
@@ -20,11 +27,11 @@ return
         ],
         'development' => [
             'adapter' => 'mysql',
-            'host' => 'localhost',
-            'name' => 'development_db',
+            'host' => $_ENV['HOST'],
+            'name' => $_ENV['DATABASE'],
             'user' => 'root',
-            'pass' => '',
-            'port' => '3306',
+            'pass' => $_ENV['PASSWORD'],
+            'port' => $_ENV['PORT'],
             'charset' => 'utf8',
         ],
         'testing' => [
