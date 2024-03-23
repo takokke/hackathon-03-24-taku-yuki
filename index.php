@@ -45,39 +45,19 @@ $route = [
         'controller_action'=> 'SessionsController#create',
     ],
     [
-        'method' => 'GET',
-        'url'=> '/user',
-        'controller_action'=> 'SessionsController#show',
-    ],
-    [
         'method' => 'POST',
         'url'=> '/sign_out',
         'controller_action'=> 'SessionsController#destroy',
     ],
     [
         'method' => 'GET',
-        'url'=> '/hairs',
-        'controller_action'=> 'HairsController#index',
-    ],
-    [
-        'method' => 'GET',
-        'url'=> '/hairs/new',
-        'controller_action'=> 'HairsController#new',
+        'url'=> '/pokemon',
+        'controller_action'=> 'PokemonController#show',
     ],
     [
         'method' => 'POST',
-        'url'=> '/hairs/create',
-        'controller_action'=> 'HairsController#create',
-    ],
-    [
-        'method' => 'GET',
-        'url'=> '/hairs/edit',
-        'controller_action'=> 'HairsController#edit',
-    ],
-    [
-        'method' => 'POST',
-        'url'=> '/hairs/update',
-	'controller_action'=> 'HairsController#update',
+        'url'=> '/pokemon',
+        'controller_action'=> 'PokemonController#update',
     ]
 ];
 $request_method = $_SERVER['REQUEST_METHOD'];

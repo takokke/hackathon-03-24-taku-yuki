@@ -22,7 +22,8 @@ final class CreateTrxCutDatesTable extends AbstractMigration
 	$table = $this->table("trx_cut_dates");
 	$table->addColumn('cut_date', 'date', ['null' => false])
 	      ->addColumn('user_id', 'integer',['signed' => false,'null' => false])
-              ->addForeignKey('user_id', 'trx_users', 'id')
+	      ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+	      ->addForeignKey('user_id', 'trx_users', 'id')
               ->create();
     }
 }
