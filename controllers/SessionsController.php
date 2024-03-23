@@ -4,7 +4,7 @@ class SessionsController {
         session_start();
         // SESSION[user_id]に値入っていればログインしたとみなす
         if(isset($_SESSION['user_id'])) {
-          header('Location: http://52.197.59.72/hairs');
+          header('Location: http://52.197.59.72/pokemon');
           exit();
         } else {
             require('../views/sessions/new.php');
@@ -23,7 +23,7 @@ class SessionsController {
         }
         if(isset($_SESSION['user_id'])) {
           // SESSION[user_id]に値入っていればログインしたとみなす
-          header('Location: http://52.197.59.72/hairs');
+          header('Location: http://52.197.59.72/pokemon');
           // exit();
         } else {
           if (!empty($_POST["email"]) && !empty($_POST["password"])) {
@@ -45,7 +45,7 @@ class SessionsController {
                       $_SESSION['user_id'] = $id;
                       $stmt->close();
                       $mysqli->close();
-                      header('Location: http://52.197.59.72/hairs');
+                      header('Location: http://52.197.59.72/pokemon');
                   } else {
                       $stmt->close();
                       $mysqli->close();
@@ -55,16 +55,7 @@ class SessionsController {
           }
         }
         $mysqli->close();
-        echo "<a href='/login'>ログイン失敗</a>";
-    }
-
-    public function show() {
-        session_start();
-        if(!isset($_SESSION['user_id'])) {
-          echo "<p><a href='/sign_in'>ログインしていません</a></p>";
-        } else {
-            require('./views/sessions/show.php');
-        }
+        echo "<a href='/sign_in'>ログイン失敗</a>";
     }
 
     public function destroy() {
@@ -73,7 +64,7 @@ class SessionsController {
             if(isset($_SESSION['user_id'])) {
                 $_SESSION = array();
                 session_destroy();
-            header('Location: http://52.197.59.72/sign_in');
+                header('Location: http://52.197.59.72/sign_in');
             } else {
                 echo "<a href='/sign_in'>ログインしていません</a>";
             }
