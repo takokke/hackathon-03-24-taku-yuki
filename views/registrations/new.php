@@ -70,7 +70,7 @@
                     </div>
 
 		    <div class="navbar-end">
-			<?php if (isset($_SESSION['user_id'])) {?>
+			<?php if (!isset($_SESSION['user_id'])) {?>
                         <div class="navbar-item">
                             <a class="button is-primary is-outlined" href="sign_in">
                                 <span class="icon">
