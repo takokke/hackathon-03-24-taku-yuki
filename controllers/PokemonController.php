@@ -15,11 +15,10 @@ class PokemonController {
 		$stmt->bind_param("i", $_SESSION['user_id']);
 		$stmt->execute();
 		$stmt->bind_result($cut_date);
-		while ($stmt->fetch()){
-                        $stmt->close();
-		        $mysqli->close();
-			require("./views/pokemon/show.php");
-		};
+		$stmt->fetch();
+                $stmt->close();
+		$mysqli->close();
+		require("./views/pokemon/show.php");
 	}
 
 	public function update(){

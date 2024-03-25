@@ -103,9 +103,7 @@
 			$cutdate=new DateTime($cut_date);
 			$diff=$cutdate->diff($today);
 			$diff=$diff->days;
-        	}else{
-			echo "変数が空";
-		}
+        	}
        		if(isset($diff)){
             		if($diff<7){
                 		$randpokenumber=array(350,700,730,282);
