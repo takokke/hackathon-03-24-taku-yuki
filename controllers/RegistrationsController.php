@@ -12,7 +12,6 @@ class RegistrationsController {
 			$mysqli= new mysqli($_ENV['HOST'], 'root', $_ENV['PASSWORD'], $_ENV['DATABASE'], $_ENV['PORT']);
 		
 			if ($mysqli->connect_error) {
-				echo $mysqli->connect_error;
 				exit();
 			} else {
 				$mysqli->set_charset('utf8');
@@ -34,8 +33,10 @@ class RegistrationsController {
 			// 切断
 			$stmt->close();
 			$mysqli->close();
-			header('Location: http://52.197.59.72/sign_up');
-		
+			header('Location: http://52.197.59.72/sign_in');
+			exit();	
+		}else{
+			echo "入力が空です";
 		}
 
 	}

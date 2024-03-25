@@ -1,13 +1,12 @@
 <?php
 class SessionsController {
     public function new() {
-        session_start();
+	session_start();
         // SESSION[user_id]に値入っていればログインしたとみなす
         if(isset($_SESSION['user_id'])) {
-          header('Location: http://52.197.59.72/pokemon');
-          exit();
-        } else {
-            require('../views/sessions/new.php');
+	    echo "ログインしています";
+	} else {
+            require('./views/sessions/new.php');
         }
     }
 
@@ -23,7 +22,7 @@ class SessionsController {
         }
         if(isset($_SESSION['user_id'])) {
           // SESSION[user_id]に値入っていればログインしたとみなす
-          header('Location: http://52.197.59.72/pokemon');
+          header('Location: http://52.197.59.72');
           // exit();
         } else {
           if (!empty($_POST["email"]) && !empty($_POST["password"])) {
@@ -40,17 +39,27 @@ class SessionsController {
               
               $stmt->bind_result($id, $email, $db_password);
               while ($stmt->fetch()) {
-                  if ($db_password == $password_hash) {
-                      $_SESSION['user_email'] = $email;
-                      $_SESSION['user_id'] = $id;
-                      $stmt->close();
-                      $mysqli->close();
-                      header('Location: http://52.197.59.72/pokemon');
-                  } else {
-                      $stmt->close();
-                      $mysqli->close();
-                      header('Location: http://52.197.59.72/sign_in');
-                  }
+		      if ($db_password == $password_hash) {
+                      	$_SESSION['user_email'] = $email;
+                      	$_SESSION['user_id'] = $id;
+                      	$stmt->close();
+		      	$mysqli->close();
+			if (headers_sent()) {
+				die("リダイレクトに失敗しました。このリンクをクリックしてください: <a href='/pokemon'>トップへ</a>");
+			} else {
+				header('Location: http://52.197.59.72');
+				exit();
+			};
+		      } else {
+                      	$stmt->close();
+		      	$mysqli->close();
+		      	if (headers_sent()) {
+				die("パスワードが違います。： <a href='/sign_in'>ログイン画面へ</a>");
+		     	 } else {
+				header('Location: http://52.197.59.72/sign_in');
+		      		exit();
+		      	};
+                      };
               };
           }
         }
@@ -63,8 +72,13 @@ class SessionsController {
         if (isset($_POST["sign_out"])) {
             if(isset($_SESSION['user_id'])) {
                 $_SESSION = array();
-                session_destroy();
-                header('Location: http://52.197.59.72/sign_in');
+		session_destroy();
+		if (headers_sent()) {
+			die("リダイレクトに失敗しました。: <a href='/sign_in'>ログイン画面へ</a>");
+		}else{
+			header('Location: http://52.197.59.72/sign_in');
+			exit();
+		}
             } else {
                 echo "<a href='/sign_in'>ログインしていません</a>";
             }
